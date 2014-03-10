@@ -1,3 +1,4 @@
+from __future__ import with_statement
 import codecs
 from distutils.core import setup
 from setuptools.command.test import test as TestCommand

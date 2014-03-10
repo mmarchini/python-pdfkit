@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
+from __future__ import with_statement
+
 import os
-import io
+try:
+    import io
+except:
+    # Hack for Python2.5
+    class io(object):
+        IOBase = file
 
 
 class Source(object):

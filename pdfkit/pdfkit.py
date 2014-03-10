@@ -1,11 +1,25 @@
 # -*- coding: utf-8 -*-
+from __future__ import with_statement
+
 import re
 import subprocess
 import sys
 from .source import Source
 from .configuration import Configuration
-from itertools import chain
-import io
+try:
+    from itertools.chain import from_iterable
+except:
+    def from_iterable(iterables):
+        # chain.from_iterable(['ABC', 'DEF']) --> A B C D E F
+        for it in iterables:
+            for element in it:
+                yield element
+try:
+    import io
+except:
+    # Hack for Python2.5
+    class io(object):
+        IOBase = file
 import codecs
 
 
@@ -58,12 +72,12 @@ class PDFKit(object):
 
         args = [self.wkhtmltopdf]
 
-        args += list(chain.from_iterable(list(self.options.items())))
+        args += list(from_iterable(list(self.options.items())))
         args = [_f for _f in args if _f]
 
         if self.toc:
             args.append('toc')
-            args += list(chain.from_iterable(list(self.toc.items())))
+            args += list(from_iterable(list(self.toc.items())))
         if self.cover:
             args.append('cover')
             args.append(self.cover)

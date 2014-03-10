@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import with_statement
 import os
-import io
+try:
+    import io
+except ImportError:
+    # Version is lower than 2.6
+    # Aborting test so you can still use this package
+    return
 import sys
 import codecs
 import unittest
