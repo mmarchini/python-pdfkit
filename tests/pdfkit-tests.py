@@ -6,7 +6,7 @@ try:
 except ImportError:
     # Version is lower than 2.6
     # Aborting test so you can still use this package
-    return
+    pass
 import sys
 import codecs
 import unittest
